@@ -1254,7 +1254,7 @@ bool FSCSRuntimeEditorTreeNodeComponent::CanEditDefaults() const
 	}
 	else if (UActorComponent* ComponentTemplate = GetComponentTemplate())
 	{
-		bCanEdit = FComponentEditorUtils::CanEditNativeComponent(ComponentTemplate);
+		bCanEdit = FComponentEditorUtils::GetPropertyForEditableNativeComponent(ComponentTemplate) != nullptr;
 	}
 
 	return bCanEdit;

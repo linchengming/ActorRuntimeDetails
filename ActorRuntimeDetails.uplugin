@@ -10,6 +10,7 @@
 	"DocsURL": "",
 	"MarketplaceURL": "",
 	"SupportURL": "",
+	"EnabledByDefault" : true,
 	"CanContainContent": false,
 	"IsBetaVersion": true,
 	"Installed": false,

@@ -62,7 +62,7 @@ private:
 	void OnSCSRuntimeEditorTreeViewSelectionChanged(const TArray<TSharedPtr<class FSCSRuntimeEditorTreeNode> >& SelectedNodes);
 	void OnSCSRuntimeEditorTreeViewItemDoubleClicked(const TSharedPtr<class FSCSRuntimeEditorTreeNode> ClickedNode);
 	void UpdateComponentTreeFromEditorSelection();
-	void OnDetailsViewObjectArrayChanged(const FString& InTitle, const TArray<TWeakObjectPtr<UObject>>& InObjects);
+	void OnDetailsViewObjectArrayChanged(const FString& InTitle, const TArray<UObject*>& InObjects);
 
 	bool IsPropertyReadOnly(const struct FPropertyAndParent& PropertyAndParent) const;
 	bool IsPropertyEditingEnabled() const;

@@ -93,7 +93,7 @@ void FKismetRuntimeVariableDragDropAction::HoverTargetChanged()
 			bBadGraph = true;
 		}
 
-		UStruct* Outer = CastChecked<UStruct>(VariableProperty->GetOuter());
+		UStruct* Outer = VariableProperty->GetOwnerStruct();
 
 		FNodeConstructionParams NewNodeParams;
 		NewNodeParams.VariableName = VariableName;
@@ -116,7 +116,7 @@ void FKismetRuntimeVariableDragDropAction::HoverTargetChanged()
 		Args.Add(TEXT("VariableName"), FText::FromString(VariableString));
 		Args.Add(TEXT("Scope"), FText::FromString(TheHoveredGraph->GetName()));
 
-		if (IsFromBlueprint(FBlueprintEditorUtils::FindBlueprintForGraph(TheHoveredGraph)) && VariableProperty->GetOuter()->IsA(UFunction::StaticClass()))
+		if (IsFromBlueprint(FBlueprintEditorUtils::FindBlueprintForGraph(TheHoveredGraph)) && VariableProperty->GetOwnerUObject()->IsA(UFunction::StaticClass()))
 		{
 			SetFeedbackMessageError(FText::Format( LOCTEXT("IncorrectGraphForLocalVariable_Error", "Cannot place local variable '{VariableName}' in external scope '{Scope}'"), Args));
 		}
@@ -370,7 +370,7 @@ FReply FKismetRuntimeVariableDragDropAction::DroppedOnPanel( const TSharedRef< S
 		UProperty* VariableProperty = GetVariableProperty();
 		if (VariableProperty && CanVariableBeDropped(VariableProperty, Graph))
 		{
-			UStruct* Outer = CastChecked<UStruct>(VariableProperty->GetOuter());
+			UStruct* Outer = VariableProperty->GetOwnerStruct();
 			
 			FNodeConstructionParams NewNodeParams;
 			NewNodeParams.VariableName = VariableName;
@@ -447,7 +447,7 @@ bool FKismetRuntimeVariableDragDropAction::CanVariableBeDropped(const UProperty*
 	bool bCanVariableBeDropped = false;
 	if (InVariableProperty)
 	{
-		UObject* Outer = InVariableProperty->GetOuter();
+		UObject* Outer = InVariableProperty->GetOwnerUObject();
 
 		// Only allow variables to be placed within the same blueprint (otherwise the self context on the dropped node will be invalid)
 		bCanVariableBeDropped = IsFromBlueprint(FBlueprintEditorUtils::FindBlueprintForGraph(&InGraph));
